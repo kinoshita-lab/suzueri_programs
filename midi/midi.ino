@@ -4,16 +4,16 @@
 #include "Motor.h"
 
 constexpr auto Number_Of_Solenoid = 4;
-constexpr auto Number_Of_Motor = 1;
+constexpr auto Number_Of_Motor = 2;
 
 constexpr int Solenoid_Pins[Number_Of_Solenoid] = {13, 3, 4, 5}; // ソレノイドのピン
-constexpr int Motor_Pins[6]; // モーターのピン
+constexpr int Motor_Pins[Number_Of_Motor] = {6, 7}; // モーターのピン
 
 constexpr auto Solenoid_On_Time_in_MilliSeconds = 50; // ソレノイドが動く時間(msec)
 constexpr auto Motor_On_Time_in_MilliSeconds = 10 * 1000; // モーターが動く時間(msec)
 
-constexpr int Solenoid_Midi_Notes[Number_Of_Solenoid] = {33, 37, 96, 100}; // ソレノイドが受けつけるノート番号
-constexpr int Motor_Midi_Notes[Number_Of_Solenoid] = {34, 38, 97, 101}; // モーターが受けつけるノート番号
+constexpr int Solenoid_Midi_Notes[Number_Of_Solenoid] = {33, 38, 96, 100}; // ソレノイドが受けつけるノート番号
+constexpr int Motor_Midi_Notes[Number_Of_Solenoid] = {41, 91}; // モーターが受けつけるノート番号
 
 Solenoider solenoiders[Number_Of_Solenoid];
 Motor motors[Number_Of_Motor];
@@ -77,12 +77,12 @@ auto loop() -> void
  }
  const auto solenoid_index = getSolenoidIndex(data1);
  if (solenoid_index != -1) {
-  solenoiders[solenoid_index].activate();  
+  solenoiders[solenoid_index].activate();
  }
 
  const auto motor_index = getMotorIndex(data1);
  if (motor_index != -1) {
    motors[motor_index].activate();
  }
- 
+
 }
